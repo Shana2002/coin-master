@@ -60,7 +60,7 @@ class _InfoPageState extends State<InfoPage> {
               children: [
                 _coinName(name),
                 _coinImage(image),
-                _coinPrice(price,change),
+                _coinPrice(price, change),
                 _coinDescription(desc),
               ],
             );
@@ -73,21 +73,27 @@ class _InfoPageState extends State<InfoPage> {
   Widget _coinName(String name) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: _deviceHieght! * 0.02),
-      width: _deviceWidth! * 0.98,
+      width: _deviceWidth! * 0.9,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: const Icon(
                 Icons.arrow_back,
                 color: Colors.white,
                 size: 30,
               )),
-          Text(
-            name.toString(),
-            style: const TextStyle(
-                color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
+          SizedBox(
+            width: _deviceWidth!* 0.55,
+            child: Text(
+              name.toString(),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+            ),
           ),
           Container(
             decoration: BoxDecoration(
@@ -135,7 +141,7 @@ class _InfoPageState extends State<InfoPage> {
     );
   }
 
-  Widget _coinPrice(String price,String change) {
+  Widget _coinPrice(String price, String change) {
     return Column(
       children: [
         Text(

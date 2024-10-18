@@ -50,50 +50,55 @@ class _HomePageState extends State<HomePage> {
               String currentPrice = _data[index]["current_price"].toString();
               num change = _data[index]["price_change_percentage_24h"];
 
-              return ListTile(
-                leading: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    minWidth: 44,
-                    minHeight: 44,
-                    maxWidth: 64,
-                    maxHeight: 64,
+              return Container(
+                decoration:const BoxDecoration(
+                  border: Border(bottom: BorderSide(width: 0.2,color: Colors.white))
+                ),
+                child: ListTile(
+                  leading: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      minWidth: 44,
+                      minHeight: 44,
+                      maxWidth: 64,
+                      maxHeight: 64,
+                    ),
+                    child: Image.network(
+                      _data[index]["image"].toString(),
+                      fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    (loadingProgress.expectedTotalBytes ?? 1)
+                                : null,
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                  child: Image.network(
-                    _data[index]["image"].toString(),
-                    fit: BoxFit.cover,
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  (loadingProgress.expectedTotalBytes ?? 1)
-                              : null,
-                        ),
-                      );
-                    },
+                  title: Text(
+                    name,
+                    style: const TextStyle(color: Colors.white, fontSize: 30),
                   ),
+                  subtitle: Text(
+                    "\$ $currentPrice",
+                    style: const TextStyle(color: Color.fromRGBO(244, 140, 6, 1)),
+                  ),
+                  trailing: Text(
+                    "${change.toString()}%",
+                    style:
+                        TextStyle(color: change > 0 ? Colors.green : Colors.red),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext _context) {
+                      return InfoPage(id: id);
+                    }));
+                  },
                 ),
-                title: Text(
-                  name,
-                  style: const TextStyle(color: Colors.white, fontSize: 30),
-                ),
-                subtitle: Text(
-                  "\$ $currentPrice",
-                  style: const TextStyle(color: Color.fromRGBO(244, 140, 6, 1)),
-                ),
-                trailing: Text(
-                  change.toString(),
-                  style:
-                      TextStyle(color: change > 0 ? Colors.green : Colors.red),
-                ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext _context) {
-                    return InfoPage(id: id);
-                  }));
-                },
               );
             },
           );
