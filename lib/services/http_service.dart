@@ -1,22 +1,40 @@
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 import '../model/app_config.dart';
 import 'package:get_it/get_it.dart';
+import 'dart:convert';
 
 class HttpService {
-  final Dio dio = Dio();
   AppConfig? _appConfig;
-  String? base_url;
+  String? baseUrl;
 
   HttpService() {
+    // Retrieve AppConfig instance using GetIt for dependency injection
     _appConfig = GetIt.instance.get<AppConfig>();
-    base_url = _appConfig!.base_url;
+    baseUrl = _appConfig!.base_url;
   }
-  Future<Response?> get(String _path) async {
+
+  Future<http.Response?> get(String _path) async {
     try {
-      String url = "$base_url$_path";
-      Response response = await dio.get(url);
-      return response;
+      String url = "$baseUrl$_path";
+      Map<String, String> headers = {
+        "accept":"application/json",
+      };
+
+      // Send the GET request
+      final response = await http.get(Uri.parse(url), headers: headers);
+
+      // Print the status code
+      print(response.statusCode);
+
+      // Check if the response was successful (status code 200)
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+        return null;
+      }
     } catch (e) {
+      // Print the error in case of an exception
       print(e);
       return null;
     }
