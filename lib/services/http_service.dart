@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import '../model/app_config.dart';
 import 'package:get_it/get_it.dart';
-import 'dart:convert';
 
 class HttpService {
   AppConfig? _appConfig;

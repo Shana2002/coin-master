@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:coinmaster/pages/info_page.dart';
 import 'package:coinmaster/services/http_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -44,11 +45,11 @@ class _HomePageState extends State<HomePage> {
           return ListView.builder(
             itemCount: _data.length,
             itemBuilder: (_context, index) {
+              String id = _data[index]['id'];
               String name = _data[index]['name'] ?? 'N/A';
               String currentPrice = _data[index]["current_price"].toString();
-              num change =
-                  _data[index]["price_change_percentage_24h"];
-              
+              num change = _data[index]["price_change_percentage_24h"];
+
               return ListTile(
                 leading: ConstrainedBox(
                   constraints: const BoxConstraints(
@@ -82,7 +83,17 @@ class _HomePageState extends State<HomePage> {
                   "\$ $currentPrice",
                   style: const TextStyle(color: Color.fromRGBO(244, 140, 6, 1)),
                 ),
-                trailing: Text(change.toString(),style: TextStyle(color: change>0 ? Colors.green : Colors.red),),
+                trailing: Text(
+                  change.toString(),
+                  style:
+                      TextStyle(color: change > 0 ? Colors.green : Colors.red),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext _context) {
+                    return InfoPage(id: id);
+                  }));
+                },
               );
             },
           );
