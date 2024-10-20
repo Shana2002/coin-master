@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:coinmaster/pages/info_page.dart';
 import 'package:coinmaster/services/http_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
