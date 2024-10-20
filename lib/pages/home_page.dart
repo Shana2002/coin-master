@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   title: Text(
                     name,
-                    style: const TextStyle(color: Colors.white, fontSize: 30),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   subtitle: Text(
                     "\$ $currentPrice",

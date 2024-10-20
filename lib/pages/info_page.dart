@@ -52,8 +52,8 @@ class _InfoPageState extends State<InfoPage> {
             String image = _data["image"]["large"].toString();
             String price =
                 _data["market_data"]["current_price"]["usd"].toString();
-            String change =
-                _data["market_data"]["price_change_percentage_24h"].toString();
+            num change =
+                _data["market_data"]["price_change_percentage_24h"];
             String desc = _data["description"]["en"];
 
             return Column(
@@ -141,7 +141,7 @@ class _InfoPageState extends State<InfoPage> {
     );
   }
 
-  Widget _coinPrice(String price, String change) {
+  Widget _coinPrice(String price, num change) {
     return Column(
       children: [
         Text(
@@ -153,7 +153,7 @@ class _InfoPageState extends State<InfoPage> {
         ),
         Text(
           "${change.toString()} %",
-          style: const TextStyle(color: Colors.red, fontSize: 15),
+          style: TextStyle(fontSize: 15,color: change>0 ? Colors.green : Colors.red),
         )
       ],
     );
