@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Color.fromRGBO(0,1,0,1), // Set the color you want for the status bar
-      statusBarIconBrightness: Brightness.light, // For light text on dark background
+      statusBarColor: Color.fromRGBO(0,1,0,1), 
+      statusBarIconBrightness: Brightness.light, 
     ));
     return MaterialApp(
       title: 'Flutter Demo',

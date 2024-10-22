@@ -7,7 +7,6 @@ class HttpService {
   String? baseUrl;
 
   HttpService() {
-    // Retrieve AppConfig instance using GetIt for dependency injection
     _appConfig = GetIt.instance.get<AppConfig>();
     baseUrl = _appConfig!.base_url;
   }
@@ -18,14 +17,10 @@ class HttpService {
       Map<String, String> headers = {
         "accept":"application/json",
       };
-
-      // Send the GET request
       final response = await http.get(Uri.parse(url), headers: headers);
 
-      // Print the status code
       print(response.statusCode);
 
-      // Check if the response was successful (status code 200)
       if (response.statusCode == 200) {
         return response;
       } else {
@@ -33,7 +28,6 @@ class HttpService {
         return null;
       }
     } catch (e) {
-      // Print the error in case of an exception
       print(e);
       return null;
     }

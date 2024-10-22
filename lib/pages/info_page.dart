@@ -116,7 +116,7 @@ class _InfoPageState extends State<InfoPage> {
       margin: EdgeInsets.symmetric(vertical: _deviceHieght! * 0.05),
       child: ConstrainedBox(
           constraints: BoxConstraints(
-            minWidth: _deviceWidth! * 0.6, // Dynamic value, so 'const' removed
+            minWidth: _deviceWidth! * 0.6,
             minHeight: _deviceHieght! * 0.3,
             maxWidth: _deviceWidth! * 0.6,
             maxHeight: _deviceHieght! * 0.3,
